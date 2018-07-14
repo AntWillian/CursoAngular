@@ -1,14 +1,19 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
     selector:'foto',
     //templateUrl:'./foto.component.html'
 
     /* Aqui é colocado o html */
-    template:'<img src="https://pbs.twimg.com/profile_images/846146544072101888/0sLpdiu1_400x400.jpg" alt="dog">',
+    template:'<img [src]="url" [alt]="titulo">',
    /* Aqui é colocado o css */
     styles:[]
 })
 
 
-export class FotoComponent{}
+export class FotoComponent{
+
+    @Input() url='';
+    @Input() titulo='';
+
+}
