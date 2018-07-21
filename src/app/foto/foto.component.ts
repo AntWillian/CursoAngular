@@ -9,7 +9,7 @@ import { Component, Input } from "@angular/core";
     /* Aqui é colocado o html */
     template:'<img class="card-img-top" [src]="url" [alt]="titulo">',
    /* Aqui é colocado o css */
-    styles:['.card-img-top{float:left;}']
+    styles:[]
 })
 
 
