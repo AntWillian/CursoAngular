@@ -10,4 +10,7 @@ export class CardComponent{
 
     @Input() foto
 
+   
+
 }
+
