@@ -38,7 +38,7 @@
 
         <aside class="col-sm-5">
           
-            <card  [foto] = "foto" class="col-2">
+            <card  [foto] = "foto" class="col-2" *ngIf="foto.url">
                 <foto [url]="foto.url" [titulo]="foto.titulo"></foto>  
             </card>
 

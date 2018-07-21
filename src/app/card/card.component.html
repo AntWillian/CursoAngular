@@ -1,7 +1,7 @@
 <div class="card" >
 
     <!-- funciona como um inport -->
-    <ng-content></ng-content>
+    <ng-content select="foto"></ng-content>
 
 
     <div class="card-body">
@@ -9,4 +9,7 @@
       <p class="card-text">{{foto.descricao}}</p>
       <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
     </div>
+
+    <ng-content select=".btn-danger"></ng-content>
+
   </div>

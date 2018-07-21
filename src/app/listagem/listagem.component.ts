@@ -11,7 +11,7 @@ export class ListagemComponent implements OnInit {
 
   listaFotos;
 
-  constructor(conexaoApi:HttpClient){
+  constructor(private conexaoApi:HttpClient){
     conexaoApi.get('http://localhost:3000/v1/fotos').subscribe(
       (fotosApi)=>{
         this.listaFotos=fotosApi
@@ -20,6 +20,18 @@ export class ListagemComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  deletar(fotoApagada){
+    this.conexaoApi.delete('http://localhost:3000/v1/fotos/' + fotoApagada._id)
+                    .subscribe(
+                      () => {
+                        this.listaFotos = Array.from(this.listaFotos)
+                        .filter((fotoLoop)=>{if(fotoLoop != fotoApagada){
+                          return fotoLoop
+                        }})
+                      }
+                    )
   }
 
 }
