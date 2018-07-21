@@ -1,18 +1,21 @@
 import { Component, Input } from "@angular/core";
 
+
+/* Notacao */
 @Component({
     selector:'foto',
     //templateUrl:'./foto.component.html'
 
     /* Aqui é colocado o html */
-    template:'<img [src]="url" [alt]="titulo">',
+    template:'<img class="card-img-top" [src]="url" [alt]="titulo">',
    /* Aqui é colocado o css */
-    styles:[]
+    styles:['.card-img-top{float:left;}']
 })
 
 
 export class FotoComponent{
 
+    /** Decoraitor  @Input() */
     @Input() url='';
     @Input() titulo='';
 

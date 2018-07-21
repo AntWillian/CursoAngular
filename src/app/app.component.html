@@ -6,10 +6,16 @@
 
 <main class="container">
 
-  <foto 
-  *ngFor='let foto of listaFotos'
-  [url]="foto.url" [titulo]="foto.titulo"></foto>
+  <card *ngFor='let foto of listaFotos' [foto] = "foto">
 
+    <foto [url]="foto.url" [titulo]="foto.titulo"></foto>
+
+
+  </card>
+
+  
+
+  
 
 
 </main>

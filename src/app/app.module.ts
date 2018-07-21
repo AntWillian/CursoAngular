@@ -4,19 +4,25 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FotoModule } from './foto/foto.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CardModule } from './card/card.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    /** inporta modulos */
     BrowserModule,
     FotoModule,
-    HttpClientModule
+    HttpClientModule,
+    CardModule
   ],
   providers: [],
 
   /** Componente que inicia a aplicação */
   bootstrap: [AppComponent]
 })
+
+
+
 export class AppModule { }
