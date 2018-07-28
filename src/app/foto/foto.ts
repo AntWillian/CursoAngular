@@ -2,12 +2,12 @@
     titulo : string;
     url: string;
     descricao : string;
-    id:string;
+    _id:string;
 }
 
 export class Foto implements FotoInterface{
     titulo = "";
     url = "";
     descricao ="";
-    id="";
+    _id="";
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Foto } from '../foto/foto';
-import { HttpClient } from '@angular/common/http';
-import { FotoService } from '../service/foto.service'
+import { FotoService } from '../service/foto.service';
+import {ActivatedRoute, Router} from '@angular/router'
 
 
 @Component({
@@ -14,17 +14,51 @@ export class CadastroComponent implements OnInit {
   foto = new Foto();
 
 
-  constructor(private servico:FotoService) { }
+  constructor(private servico:FotoService,
+              private rotaAtiva: ActivatedRoute,
+              private roteador: Router) { }
+
+
+  ngOnInit() {
+
+    console.log(this.rotaAtiva.snapshot.params.fotoId);
+
+    const fotoId = this.rotaAtiva.snapshot.params.fotoId;
+
+    if(fotoId){
+      this.servico.buscar(fotoId).subscribe(
+        fotoApi => {
+          this.foto=fotoApi
+        }
+      )
+    }
+
+
+   /* this.rotaAtiva.params.subscribe(
+      parametros => {
+        console.log(parametros.fotoId)
+      }
+    )*/
+      
+    }
+  
 
 
   salvar(){
-    this.servico.cadastrar(this.foto).subscribe(
-      (resposta) =>{console.log(resposta)},
-      (erro) =>{console.log(erro)}
-    )
+
+    if(this.foto._id){
+      this.servico.atualizar(this.foto).subscribe(
+        () => this.roteador.navigate([''])
+      )
+    }else{
+      this.servico.cadastrar(this.foto).subscribe(
+        (resposta) =>{console.log(resposta)},
+        (erro) =>{console.log(erro)}
+      )
+    }
+    
 }
 
-  ngOnInit() {
-  }
+  
 
 }

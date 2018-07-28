@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FotoService } from '../service/foto.service'
+import { Foto } from '../foto/foto';
 
 @Component({
   
@@ -12,17 +13,19 @@ import { FotoService } from '../service/foto.service'
 
 export class ListagemComponent implements OnInit {
 
-  listaFotos;
+  listaFotos:Foto[];
 
   constructor(private servico:FotoService){
+   
+  }
+
+  ngOnInit() {
+
     this.servico.listar().subscribe(
 
       fotosApi=> this.listaFotos=fotosApi
       
     )
-  }
-
-  ngOnInit() {
   }
 
   deletar(fotoApagada){
