@@ -10,13 +10,15 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { ModuloRoteamento } from './app.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MensagemComponent } from './mensagem/mensagem.component'
+import { FiltroPorTitulo } from './listagem/filtroPorTitulo.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListagemComponent,
     CadastroComponent,
-    MensagemComponent
+    MensagemComponent,
+    FiltroPorTitulo
   ],
   imports: [
     /** inporta modulos */
@@ -27,6 +29,7 @@ import { MensagemComponent } from './mensagem/mensagem.component'
     ModuloRoteamento,
     FormsModule,
     ReactiveFormsModule
+    
   ],
   providers: [],
 
