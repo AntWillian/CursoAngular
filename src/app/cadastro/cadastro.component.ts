@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Foto } from '../foto/foto';
 import { FotoService } from '../service/foto.service';
 import {ActivatedRoute, Router} from '@angular/router'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -12,15 +13,30 @@ import {ActivatedRoute, Router} from '@angular/router'
 export class CadastroComponent implements OnInit {
 
   foto = new Foto();
-  mensagem = false;
+  mensagem = {
+    conteudo : '',
+    tipo:''
+  }
+
+  formCadastro: FormGroup
 
 
   constructor(private servico:FotoService,
               private rotaAtiva: ActivatedRoute,
-              private roteador: Router) { }
+              private roteador: Router,
+            private formBuider: FormBuilder) { }
 
 
   ngOnInit() {
+
+    this.formCadastro = this.formBuider.group({
+      titulo: ['',Validators.compose([
+        Validators.required,
+        Validators.minLength(5)
+      ])],
+      url:  ['',Validators.required],
+      descricao:''
+    })
 
     console.log(this.rotaAtiva.snapshot.params.fotoId);
 
@@ -30,6 +46,8 @@ export class CadastroComponent implements OnInit {
       this.servico.buscar(fotoId).subscribe(
         fotoApi => {
           this.foto=fotoApi
+
+          this.formCadastro.patchValue(this.foto)
         }
       )
     }
@@ -47,6 +65,8 @@ export class CadastroComponent implements OnInit {
 
   salvar(){
 
+    this.foto = {...this.foto,...this.formCadastro.value};
+
     if(this.foto._id){
       this.servico.atualizar(this.foto).subscribe(
         () => this.roteador.navigate([''])
@@ -60,10 +80,12 @@ export class CadastroComponent implements OnInit {
         ,
 
         ()=>{
-          this.mensagem = true
+          this.mensagem.conteudo =`${this.foto.titulo} cadastrado com sucesso`
+          this.mensagem.tipo = 'success'
             setTimeout(() => {
-              this.mensagem = false;
-              this.foto = new Foto()
+              this.formCadastro.reset()
+              this.mensagem.conteudo = ''
+              //this.foto = new Foto()
               
             }, 2000);
           }
