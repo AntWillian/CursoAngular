@@ -7,13 +7,16 @@ import { FotoService } from '../service/foto.service'
   templateUrl: './listagem.component.html',
   styleUrls: ['./listagem.component.css']
 })
+
+
+
 export class ListagemComponent implements OnInit {
 
   listaFotos;
 
   constructor(private servico:FotoService){
     this.servico.listar().subscribe(
-      
+
       fotosApi=> this.listaFotos=fotosApi
       
     )
@@ -22,8 +25,8 @@ export class ListagemComponent implements OnInit {
   ngOnInit() {
   }
 
- /* deletar(fotoApagada){
-    this.conexaoApi.delete('http://localhost:3000/v1/fotos/' + fotoApagada._id)
+  deletar(fotoApagada){
+    this.servico.deletar(fotoApagada._id)
                     .subscribe(
                       () => {
                         this.listaFotos = Array.from(this.listaFotos)
@@ -32,6 +35,6 @@ export class ListagemComponent implements OnInit {
                         }})
                       }
                     )
-  }*/
+  }
 
 }

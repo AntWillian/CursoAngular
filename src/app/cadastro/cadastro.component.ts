@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Foto } from '../foto/foto';
 import { HttpClient } from '@angular/common/http';
+import { FotoService } from '../service/foto.service'
+
 
 @Component({
   selector: 'app-cadastro',
@@ -12,13 +14,11 @@ export class CadastroComponent implements OnInit {
   foto = new Foto();
 
 
-  constructor(private conexaoApi: HttpClient) { }
+  constructor(private servico:FotoService) { }
 
 
   salvar(){
-    this.conexaoApi.post(
-      'http://localhost:3000/v1/fotos',this.foto
-    ).subscribe(
+    this.servico.cadastrar(this.foto).subscribe(
       (resposta) =>{console.log(resposta)},
       (erro) =>{console.log(erro)}
     )
