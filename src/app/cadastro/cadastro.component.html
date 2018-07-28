@@ -7,7 +7,13 @@
 
 <main class="container">
 
-
+    <div class="row" *ngIf='mensagem'>
+        <div class="col-12">
+            <cp-mensagem tipo = "success">
+                {{foto.titulo}} cadastrado com sucesso
+            </cp-mensagem>
+        </div>
+    </div>
 
     <section class="row">
         <form (ngSubmit)="salvar()" class="col-sm-7" >

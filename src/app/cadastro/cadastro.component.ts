@@ -12,6 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router'
 export class CadastroComponent implements OnInit {
 
   foto = new Foto();
+  mensagem = false;
 
 
   constructor(private servico:FotoService,
@@ -52,8 +53,20 @@ export class CadastroComponent implements OnInit {
       )
     }else{
       this.servico.cadastrar(this.foto).subscribe(
-        (resposta) =>{console.log(resposta)},
-        (erro) =>{console.log(erro)}
+
+        () =>{}
+        ,
+        (erro) => console.log(erro)
+        ,
+
+        ()=>{
+          this.mensagem = true
+            setTimeout(() => {
+              this.mensagem = false;
+              this.foto = new Foto()
+              
+            }, 2000);
+          }
       )
     }
     
