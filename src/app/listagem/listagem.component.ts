@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { FotoService } from '../service/foto.service'
 
 @Component({
   
@@ -11,18 +11,18 @@ export class ListagemComponent implements OnInit {
 
   listaFotos;
 
-  constructor(private conexaoApi:HttpClient){
-    conexaoApi.get('http://localhost:3000/v1/fotos').subscribe(
-      (fotosApi)=>{
-        this.listaFotos=fotosApi
-      }
+  constructor(private servico:FotoService){
+    this.servico.listar().subscribe(
+      
+      fotosApi=> this.listaFotos=fotosApi
+      
     )
   }
 
   ngOnInit() {
   }
 
-  deletar(fotoApagada){
+ /* deletar(fotoApagada){
     this.conexaoApi.delete('http://localhost:3000/v1/fotos/' + fotoApagada._id)
                     .subscribe(
                       () => {
@@ -32,6 +32,6 @@ export class ListagemComponent implements OnInit {
                         }})
                       }
                     )
-  }
+  }*/
 
 }
